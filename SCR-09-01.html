@@ -1,0 +1,393 @@
+<html class="light" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1366ec",
+                        "background-light": "#f2f5f9",
+                        "background-dark": "#101923",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "Noto Sans JP", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+
+  /* ★ 数式フォントを前回と同じにする */
+  .math-text{
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+  }
+
+  .canvas-area {
+    background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .dark .canvas-area {
+    background-image: radial-gradient(#374151 1px, transparent 1px);
+  }
+</style>
+<style>
+/* handwrite-tools */
+.tool-active{
+  background-color:#1366ec !important;
+  color:#ffffff !important;
+  border-color:#1366ec !important;
+  box-shadow: 0 0 0 2px rgba(19,102,236,0.35);
+}
+.tool-active .material-symbols-outlined{
+  color:#ffffff !important;
+}
+</style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d131b] dark:text-slate-100 flex flex-col min-h-screen">
+<header class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center justify-between px-6 py-3 max-w-6xl mx-auto w-full">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="text-center">
+<h1 class="text-base font-bold">因数分解</h1>
+<p class="text-[11px] text-gray-500 font-medium">第 2 問 / 全 10 問</p>
+</div>
+<button id="closeBtn" type="button" class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="w-full h-1.5 bg-gray-100 dark:bg-gray-800">
+<div class="bg-primary h-full w-[20%] transition-all duration-500"></div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-5xl mx-auto p-6 space-y-6 pt-24">
+<section class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start mb-6 gap-4">
+<div>
+<p class="text-xs font-bold text-gray-400 mb-2">問題</p>
+<p class="text-gray-500 dark:text-gray-400 text-lg text-left">次の式を因数分解しなさい。</p>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-6 py-3 rounded-xl text-xl md:text-2xl font-bold tracking-tight border border-gray-200 dark:border-gray-700 shadow-sm whitespace-nowrap">
+                    難易度 67PT
+                </div>
+</div>
+<div class="text-center py-6">
+<span class="text-5xl md:text-6xl font-bold tracking-tighter text-gray-800 dark:text-white math-text">
+  ab + bc
+</span>
+</div>
+</section>
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400">edit_note</span>
+<h3 class="text-sm font-bold text-gray-600 dark:text-gray-300">計算欄</h3>
+</div>
+<div class="flex gap-1">
+<button type="button" data-target="calc" data-tool="pen" class="flex items-center justify-center h-9 w-10 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-600 rounded-l-md">
+<span class="material-symbols-outlined text-[20px] fill-icon">edit</span>
+</button>
+<button type="button" data-target="calc" data-tool="eraser" class="flex items-center justify-center h-9 w-10 border-y border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-600">
+<span class="material-symbols-outlined text-[20px]">ink_eraser</span>
+</button>
+<button type="button" data-target="calc" data-tool="clear" class="flex items-center justify-center h-9 px-4 rounded-r-md border-y border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-red-500 hover:bg-red-50 transition-colors text-[11px] font-bold">
+クリア
+</button>
+</div>
+</div>
+<div class="w-full h-48 md:h-56 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 canvas-area relative overflow-hidden">
+<canvas id="calcCanvas" class="absolute inset-0 w-full h-full touch-none"></canvas>
+<p id="calcPlaceholder" class="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-700 text-sm pointer-events-none font-medium">計算はここに書いてください</p>
+</div>
+</section>
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit</span>
+<h3 class="text-sm font-bold text-gray-600 dark:text-gray-300">回答欄</h3>
+</div>
+<div class="flex gap-1">
+<button id="ocrBtn" type="button" class="flex items-center gap-1.5 h-9 px-4 rounded-l-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">spellcheck</span>
+<span class="text-[11px] font-bold">文字認識</span>
+</button>
+<button type="button" data-target="answer" data-tool="pen" class="flex items-center justify-center h-9 w-10 border-y border-x-0 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-600">
+<span class="material-symbols-outlined text-[20px] fill-icon">edit</span>
+</button>
+<button type="button" data-target="answer" data-tool="eraser" class="flex items-center justify-center h-9 w-10 border-y border-x border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-600">
+<span class="material-symbols-outlined text-[20px]">ink_eraser</span>
+</button>
+<button type="button" data-target="answer" data-tool="clear" class="flex items-center justify-center h-9 px-4 rounded-r-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-red-500 hover:bg-red-50 transition-colors text-[11px] font-bold">
+クリア
+</button>
+</div>
+</div>
+<div class="w-full h-24 bg-white dark:bg-gray-900 rounded-xl border-2 border-primary/30 dark:border-primary/50 canvas-area relative overflow-hidden">
+<canvas id="answerCanvas" class="absolute inset-0 w-full h-full touch-none"></canvas>
+<p id="answerPlaceholder" class="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-700 text-sm pointer-events-none font-medium">答えはここに書いてください</p>
+</div>
+</section>
+<section class="space-y-2 pb-24">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-sm">visibility</span>
+<h3 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">認識結果</h3>
+</div>
+<div class="w-full min-h-[56px] bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-800 p-4 flex items-center">
+<span id="ocrResultText" class="text-base font-bold text-gray-800 dark:text-white tracking-tight"></span>
+</div>
+</section>
+</main>
+<footer class="fixed bottom-0 left-0 right-0 p-6 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 z-30">
+<div class="max-w-5xl mx-auto">
+<button id="gradeBtn" type="button" class="w-full py-4 bg-primary text-white rounded-xl font-bold text-lg shadow-lg shadow-primary/30 hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                採点する
+                <span class="material-symbols-outlined text-2xl">check_circle</span>
+</button>
+</div>
+</footer>
+
+<script>
+(function(){
+  // Pen color should be black
+  const PEN_COLOR = '#000000';
+
+  function getPoint(canvas, e){
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  }
+
+  function resizeCanvas(canvas){
+    const rect = canvas.getBoundingClientRect();
+    const ratio = window.devicePixelRatio || 1;
+    // preserve current drawing
+    let dataUrl = null;
+    try {
+      dataUrl = canvas.toDataURL();
+    } catch(e) {}
+
+    canvas.width = Math.max(1, Math.floor(rect.width * ratio));
+    canvas.height = Math.max(1, Math.floor(rect.height * ratio));
+
+    const ctx = canvas.getContext('2d');
+    // Make 1 unit in CSS px
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    if (dataUrl && dataUrl.length > 20 && dataUrl !== 'data:,'){
+      const img = new Image();
+      img.onload = () => {
+        // draw in CSS pixel size
+        ctx.drawImage(img, 0, 0, rect.width, rect.height);
+      };
+      img.src = dataUrl;
+    }
+
+    return ctx;
+  }
+
+  function setupHandwriteArea(areaKey, canvasId, placeholderId){
+    const canvas = document.getElementById(canvasId);
+    const placeholder = document.getElementById(placeholderId);
+    if(!canvas) return null;
+
+    let ctx = resizeCanvas(canvas);
+    let drawing = false;
+    let tool = 'pen';
+
+    function applyTool(){
+      if(tool === 'eraser'){
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = 18;
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = PEN_COLOR;
+      }
+    }
+
+    function hidePlaceholder(){
+      if(placeholder) placeholder.style.display = 'none';
+    }
+    function showPlaceholder(){
+      if(placeholder) placeholder.style.display = 'flex';
+    }
+
+    function pointerDown(e){
+      drawing = true;
+      canvas.setPointerCapture?.(e.pointerId);
+      hidePlaceholder();
+      applyTool();
+      const p = getPoint(canvas, e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+
+    function pointerMove(e){
+      if(!drawing) return;
+      applyTool();
+      const p = getPoint(canvas, e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+
+    function pointerUp(e){
+      drawing = false;
+      ctx.closePath();
+    }
+
+    canvas.addEventListener('pointerdown', pointerDown);
+    canvas.addEventListener('pointermove', pointerMove);
+    canvas.addEventListener('pointerup', pointerUp);
+    canvas.addEventListener('pointercancel', pointerUp);
+    canvas.addEventListener('pointerleave', pointerUp);
+
+    function clear(){
+      // Clear in device space
+      ctx.save();
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,canvas.width, canvas.height);
+      ctx.restore();
+      showPlaceholder();
+    }
+
+    function setTool(nextTool){
+      tool = nextTool;
+      applyTool();
+    }
+
+    function hasInk(){
+      try{
+        const img = ctx.getImageData(0,0,canvas.width, canvas.height).data;
+        for(let i=3;i<img.length;i+=4){
+          if(img[i] !== 0) return true;
+        }
+      }catch(e){}
+      return false;
+    }
+
+    return {
+      key: areaKey,
+      canvas,
+      get ctx(){ return ctx; },
+      refreshCtx(){ ctx = resizeCanvas(canvas); applyTool(); },
+      clear,
+      setTool,
+      hasInk,
+      showPlaceholder,
+      hidePlaceholder
+    };
+  }
+
+  const areas = {
+    calc: setupHandwriteArea('calc', 'calcCanvas', 'calcPlaceholder'),
+    answer: setupHandwriteArea('answer', 'answerCanvas', 'answerPlaceholder')
+  };
+
+  // Tool button handling
+  function setActiveButton(targetKey, tool){
+    const btns = document.querySelectorAll(`[data-target="${targetKey}"][data-tool]`);
+    btns.forEach(b => {
+      const isActive = b.getAttribute('data-tool') === tool;
+      if(isActive){
+        b.classList.add('tool-active');
+      } else {
+        b.classList.remove('tool-active');
+      }
+    });
+  }
+
+  document.querySelectorAll('[data-tool][data-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      const tool = btn.getAttribute('data-tool');
+      const area = areas[target];
+      if(!area) return;
+
+      if(tool === 'clear'){
+        area.clear();
+        return;
+      }
+      area.setTool(tool);
+      setActiveButton(target, tool);
+    });
+  });
+
+  // Initial active states
+  setActiveButton('calc','pen');
+  setActiveButton('answer','pen');
+
+  // Resize observer for responsiveness
+  const ro = new ResizeObserver(() => {
+    Object.values(areas).forEach(a => {
+      if(!a) return;
+      a.refreshCtx();
+      // If there's no ink after resize, show placeholder
+      if(!a.hasInk()) a.showPlaceholder();
+    });
+  });
+  Object.values(areas).forEach(a => a && ro.observe(a.canvas));
+
+  // Navigation
+  const gradeBtn = document.getElementById('gradeBtn');
+  if(gradeBtn){
+    gradeBtn.addEventListener('click', () => {
+      window.location.href = 'SCR-10-01.html';
+    });
+  }
+
+  const closeBtn = document.getElementById('closeBtn');
+  if(closeBtn){
+    closeBtn.addEventListener('click', () => {
+      window.location.href = 'SCR-11-01.html';
+    });
+  }
+
+  // OCR (mock)
+  const ocrBtn = document.getElementById('ocrBtn');
+  const ocrResultText = document.getElementById('ocrResultText');
+  if(ocrBtn && ocrResultText){
+    ocrBtn.addEventListener('click', () => {
+      ocrResultText.textContent = 'ab+bc';
+    });
+  }
+})();
+</script>
+
+</body></html>

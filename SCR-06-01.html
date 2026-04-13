@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="light" lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>因数分解ドリル - Factorization Drill</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1D6BE5",
+            "background-light": "#F8FAFC",
+            "background-dark": "#0F172A",
+            "card-light": "#FFFFFF",
+            "card-dark": "#1E293B",
+          },
+          fontFamily: {
+            display: ["Inter", "Noto Sans JP", "sans-serif"],
+            math: ["Times New Roman", "serif"],
+          },
+          borderRadius: {
+            DEFAULT: "12px",
+          },
+        },
+      },
+    };
+  </script>
+  <style type="text/tailwindcss">
+    .math-font {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: normal;   /* 全体は通常体 */
+}
+
+.math-var {
+  font-style: italic;   /* 変数だけ斜体 */
+}
+    body {
+      -webkit-tap-highlight-color: transparent;
+      min-height: 100vh;
+    }
+    .grid-background {
+      background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .dark .grid-background {
+      background-image: radial-gradient(#334155 1px, transparent 1px);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+  <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex flex-col">
+  <header class="sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+    <div class="flex items-center justify-between px-6 py-3 max-w-6xl mx-auto w-full">
+      <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">arrow_back</span>
+      </button>
+      <div class="text-center">
+        <h1 class="text-sm font-bold text-slate-800 dark:text-slate-200">因数分解</h1>
+        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">第 1 問 / 全 10 問</p>
+      </div>
+      <button id="btnClose"
+  class="invisible p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+  <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">close</span>
+</button>
+    </div>
+    <div class="w-full h-1 bg-slate-100 dark:bg-slate-800 overflow-hidden">
+      <div class="h-full bg-primary transition-all duration-500 ease-out" style="width: 10%"></div>
+    </div>
+  </header>
+
+  <main class="flex-1 overflow-y-auto px-6 py-8 max-w-5xl mx-auto w-full">
+    <div class="relative bg-white dark:bg-card-dark rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden mb-8">
+      <div class="absolute top-4 right-4 z-10">
+        <div class="px-6 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full shadow-sm">
+          <span class="text-base md:text-lg font-bold text-slate-600 dark:text-slate-300 tracking-tight">難易度 66PT</span>
+        </div>
+      </div>
+      <div class="p-6 md:p-8">
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">
+          問題 次の式を因数分解すると、次のどの式になりますか？
+        </p>
+        <div class="grid-background rounded-xl border border-slate-100 dark:border-slate-800 flex justify-center items-center py-16 md:py-24">
+          <span class="text-4xl md:text-6xl font-bold math-font tracking-tight text-slate-900 dark:text-white">
+            <i>x</i>² + 5<i>x</i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 mb-4 px-1">
+      <span class="material-symbols-outlined text-primary text-sm">touch_app</span>
+      <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">解答を選択</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-32">
+      <button class="js-option relative flex items-center p-4 md:p-6 rounded-xl border-2 border-primary bg-primary/5 dark:bg-primary/10 transition-all shadow-sm text-left" data-value="A" aria-pressed="true" type="button">
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-white text-sm font-bold shrink-0">ア</span>
+          <span class="text-lg md:text-xl font-medium math-font text-primary dark:text-blue-400">
+  <span class="math-var">x</span>(
+  <span class="math-var">x</span> + 5)
+</span>
+        </div>
+        <span class="js-check material-symbols-outlined text-primary fill-1">check_circle</span>
+      </button>
+      <button class="js-option relative flex items-center p-4 md:p-6 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-card-dark hover:border-slate-300 dark:hover:border-slate-700 transition-all text-left" data-value="B" aria-pressed="false" type="button">
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold shrink-0">イ</span>
+          <span class="text-lg md:text-xl font-medium math-font text-slate-900 dark:text-white">
+  (<span class="math-var">x</span> + 5)²
+</span>
+        </div>
+        <span class="js-check material-symbols-outlined text-primary fill-1 hidden">check_circle</span>
+      </button>
+      <button class="js-option relative flex items-center p-4 md:p-6 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-card-dark hover:border-slate-300 dark:hover:border-slate-700 transition-all text-left" data-value="C" aria-pressed="false" type="button">
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold shrink-0">ウ</span>
+          <span class="text-lg md:text-xl font-medium math-font text-slate-900 dark:text-white">
+  <span class="math-var">x</span>²(5<span class="math-var">x</span>)
+</span>
+        </div>
+        <span class="js-check material-symbols-outlined text-primary fill-1 hidden">check_circle</span>
+      </button>
+      <button class="js-option relative flex items-center p-4 md:p-6 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-card-dark hover:border-slate-300 dark:hover:border-slate-700 transition-all text-left" data-value="D" aria-pressed="false" type="button">
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold shrink-0">エ</span>
+          <span class="text-lg md:text-xl font-medium math-font text-slate-900 dark:text-white">
+  (<span class="math-var">x</span> + 1)(<span class="math-var">x</span> + 5)
+</span>
+        </div>
+        <span class="js-check material-symbols-outlined text-primary fill-1 hidden">check_circle</span>
+      </button>
+    </div>
+  </main>
+
+  <div class="fixed bottom-0 left-0 right-0 p-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 z-20">
+    <div class="max-w-5xl mx-auto">
+      <button id="btnGrade" type="button" class="w-full bg-primary hover:bg-blue-600 active:scale-[0.98] text-white py-4 md:py-5 rounded-2xl font-bold text-2xl shadow-lg shadow-primary/30 transition-all tracking-wider">
+        採点する
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const closeBtn = document.getElementById('btnClose');
+      const gradeBtn = document.getElementById('btnGrade');
+
+      if (closeBtn) closeBtn.addEventListener('click', () => { window.location.href = 'SCR-08-01.html'; });
+      if (gradeBtn) {
+  gradeBtn.addEventListener('click', () => {
+    // 選択中のボタンを取得
+    const selected = document.querySelector('.js-option[aria-pressed="true"]');
+    if (!selected) return;
+
+    const value = selected.dataset.value;
+
+    // 正誤判定
+    if (value === 'A') {
+      // 正解
+      window.location.href = 'SCR-07-01.html';
+    } else {
+      // 不正解
+      window.location.href = 'SCR-08-01.html';
+    }
+  });
+}
+
+      const options = Array.from(document.querySelectorAll('.js-option'));
+
+      const applySelected = (btn, selected) => {
+        const badge = btn.querySelector('span.w-8.h-8');
+        const text = btn.querySelector('.math-font');
+        const check = btn.querySelector('.js-check');
+
+        btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+
+        if (selected) {
+          btn.classList.add('border-primary', 'bg-primary/5', 'dark:bg-primary/10', 'shadow-sm');
+          btn.classList.remove('border-slate-200', 'dark:border-slate-800', 'bg-white', 'dark:bg-card-dark');
+          if (badge) { badge.classList.add('bg-primary', 'text-white'); badge.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-400'); }
+          if (text) { text.classList.add('text-primary', 'dark:text-blue-400'); text.classList.remove('text-slate-900', 'dark:text-white'); }
+          if (check) check.classList.remove('hidden');
+        } else {
+          btn.classList.remove('border-primary', 'bg-primary/5', 'dark:bg-primary/10', 'shadow-sm');
+          btn.classList.add('border-slate-200', 'dark:border-slate-800', 'bg-white', 'dark:bg-card-dark');
+          if (badge) { badge.classList.remove('bg-primary', 'text-white'); badge.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-400'); }
+          if (text) { text.classList.remove('text-primary', 'dark:text-blue-400'); text.classList.add('text-slate-900', 'dark:text-white'); }
+          if (check) check.classList.add('hidden');
+        }
+      };
+
+      const selectOnly = (target) => {
+        options.forEach(btn => applySelected(btn, btn === target));
+      };
+
+      const initial = options.find(b => b.getAttribute('aria-pressed') === 'true') || options[0];
+      if (initial) selectOnly(initial);
+
+      options.forEach(btn => {
+        btn.addEventListener('click', () => selectOnly(btn));
+      });
+    })();
+  </script>
+</body>
+</html>

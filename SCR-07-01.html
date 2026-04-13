@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="light" lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>因数分解ドリル - 採点結果（正解）</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1D6BE5",
+            "background-light": "#F8FAFC",
+            "background-dark": "#0F172A",
+            "card-light": "#FFFFFF",
+            "card-dark": "#1E293B",
+          },
+          fontFamily: {
+            display: ["Inter", "Noto Sans JP", "sans-serif"],
+            math: ["Times New Roman", "serif"],
+          },
+          borderRadius: {
+            DEFAULT: "12px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style type="text/tailwindcss">
+    .math-font {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: normal;   /* 全体は通常体 */
+}
+
+.math-var {
+  font-style: italic;   /* 変数だけ斜体 */
+}
+    body {
+      -webkit-tap-highlight-color: transparent;
+      min-height: 100vh;
+    }
+    .grid-background {
+      background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .dark .grid-background {
+      background-image: radial-gradient(#334155 1px, transparent 1px);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+
+  <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex flex-col">
+
+  <header class="sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+    <div class="flex items-center justify-between px-6 h-14 max-w-6xl mx-auto w-full">
+      <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors" type="button" aria-label="戻る">
+        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">arrow_back</span>
+      </button>
+      <div class="text-center">
+        <h1 class="text-sm font-bold text-slate-800 dark:text-slate-200">因数分解</h1>
+        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">第 1 問 / 全 10 問</p>
+      </div>
+      <button id="btnClose" type="button" aria-label="閉じる"
+  class="invisible p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+  <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">close</span>
+</button>
+    </div>
+    <div class="w-full h-1 bg-slate-100 dark:bg-slate-800 overflow-hidden">
+      <div class="h-full bg-primary transition-all duration-500 ease-out" style="width: 10%"></div>
+    </div>
+  </header>
+
+  <main class="flex-1 overflow-y-auto px-6 py-8 max-w-5xl mx-auto w-full">
+
+    <div class="relative bg-white dark:bg-card-dark rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden mb-8">
+      <div class="absolute top-4 right-4 z-10">
+        <div class="px-6 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full shadow-sm">
+          <span class="text-base md:text-lg font-bold text-slate-600 dark:text-slate-300 tracking-tight">難易度 66PT</span>
+        </div>
+      </div>
+
+      <div class="p-6 md:p-8">
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">問題 次の式を因数分解すると、次のどの式になりますか？</p>
+        <div class="grid-background rounded-xl border border-slate-100 dark:border-slate-800 flex justify-center items-center py-16 md:py-24">
+          <span class="text-4xl md:text-6xl font-bold math-font tracking-tight text-slate-900 dark:text-white"><i>x</i>² + 5<i>x</i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 mb-4 px-1">
+      <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+      <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">採点結果</span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <button class="relative flex items-center p-4 md:p-6 rounded-xl border-2 border-primary bg-primary/5 dark:bg-primary/10 shadow-sm text-left" type="button" disabled>
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-white text-sm font-bold shrink-0">ア</span>
+          <span class="relative inline-block text-lg md:text-xl font-medium math-font text-primary dark:text-blue-400 z-0">
+  <span class="math-var">x</span>(
+  <span class="math-var">x</span> + 5)
+            <span class="absolute left-1/2 top-1/2 pointer-events-none -z-10" style="width: 96px; height: 96px; transform: translate(-50%, -50%);">
+              <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#ef4444" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              </svg>
+            </span>
+          </span>
+        </div>
+        <span class="material-symbols-outlined text-primary">check_circle</span>
+      </button>
+
+      <button class="relative flex items-center p-4 md:p-6 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-card-dark text-left opacity-90" type="button" disabled>
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold shrink-0">イ</span>
+          <span class="text-lg md:text-xl font-medium math-font text-slate-900 dark:text-white">
+  (<span class="math-var">x</span> + 5)²
+</span>
+        </div>
+      </button>
+
+      <button class="relative flex items-center p-4 md:p-6 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-card-dark text-left opacity-90" type="button" disabled>
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold shrink-0">ウ</span>
+          <span class="text-lg md:text-xl font-medium math-font text-slate-900 dark:text-white">
+  <span class="math-var">x</span>²(5<span class="math-var">x</span>)
+</span>
+        </div>
+      </button>
+
+      <button class="relative flex items-center p-4 md:p-6 rounded-xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-card-dark text-left opacity-90" type="button" disabled>
+        <div class="flex items-center gap-4 flex-1">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold shrink-0">エ</span>
+          <span class="text-lg md:text-xl font-medium math-font text-slate-900 dark:text-white">
+  (<span class="math-var">x</span> + 1)(<span class="math-var">x</span> + 5)
+</span>
+        </div>
+      </button>
+    </div>
+
+    <section class="bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 md:p-6 mb-28">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-primary">emoji_objects</span>
+        <h2 class="text-sm md:text-base font-bold">解答・解説</h2>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="hidden md:flex flex-col gap-2 shrink-0 pt-1">
+          <div class="px-4 py-2 rounded-lg bg-primary text-white text-xs font-bold w-20 text-center">解答</div>
+          <div class="px-4 py-2 rounded-lg bg-slate-200/60 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold w-20 text-center">解説</div>
+        </div>
+
+        <div class="flex-1 space-y-4">
+          <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-2xl p-4 md:p-5">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <span class="px-3 py-1 rounded-lg bg-primary text-white text-xs font-bold">解答</span>
+                <div class="flex items-center gap-3">
+                  <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-white text-sm font-bold">ア</span>
+                  <span class="text-lg md:text-xl font-medium math-font text-primary dark:text-blue-400">
+  <span class="math-var">x</span>(
+  <span class="math-var">x</span> + 5)
+</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-primary">check_circle</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-2xl p-4 md:p-6">
+            <h3 class="text-base md:text-lg font-bold mb-2">Step 1：共通因数を見つける</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">式 <span class="math-font">x² + 5x</span> の各項を分解すると、</p>
+            <div class="bg-slate-50 dark:bg-slate-900/40 border-l-4 border-primary rounded-xl p-3 md:p-4">
+              <div class="text-sm md:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
+                <div><span class="math-font">x²</span> = <span class="math-font">x × x</span></div>
+                <div><span class="math-font">5x</span> = <span class="math-font">5 × x</span></div>
+              </div>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-3">どちらの項にも共通して含まれている文字 <span class="math-font font-bold">x</span> が共通因数です。</p>
+          </div>
+
+          <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-2xl p-4 md:p-6">
+            <h3 class="text-base md:text-lg font-bold mb-2">Step 2：共通因数でくくる</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300">共通因数 <span class="math-font font-bold">x</span> をカッコの前に出し、残りの部分をカッコの中に入れます。</p>
+            <div class="mt-4 text-right">
+              <span class="text-2xl md:text-3xl font-bold math-font text-primary">
+  <span class="math-var">x</span>(
+  <span class="math-var">x</span> + 5)
+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="fixed bottom-0 left-0 right-0 p-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 z-20">
+    <div class="max-w-5xl mx-auto">
+      <button id="btnNext" type="button" class="w-full bg-primary hover:bg-blue-600 active:scale-[0.98] text-white py-4 md:py-5 rounded-2xl font-bold text-2xl shadow-lg shadow-primary/30 transition-all tracking-wider">
+        次の問題へ →
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const closeBtn = document.getElementById('btnClose');
+      const nextBtn = document.getElementById('btnNext');
+
+      if (closeBtn) closeBtn.addEventListener('click', () => { window.location.href = 'SCR-08ｰ01.html'; });
+      if (nextBtn) nextBtn.addEventListener('click', () => {
+        window.location.href = 'SCR-09-01.html';
+      });
+    })();
+  </script>
+</body>
+</html>
